@@ -1,6 +1,6 @@
-better-camelize
+camelize-ts
 ===
-[![Build Status](https://travis-ci.com/kbrabrand/better-camelize.svg?branch=master)](https://travis-ci.com/kbrabrand/better-camelize)
+[![Build Status](https://travis-ci.com/kbrabrand/camelize-ts.svg?branch=master)](https://travis-ci.com/kbrabrand/camelize-ts)
 
 A typescript typed camelCase function that recursively camel cases a snake cased object structure. It camel cases a simple string too, if you need that.
 
