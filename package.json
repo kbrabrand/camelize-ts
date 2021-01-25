@@ -1,6 +1,6 @@
 {
   "name": "camelize-ts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Recursive camel casing of object property names with proper typing",
   "main": "dist/index.js",
   "scripts": {
@@ -11,10 +11,10 @@
   },
   "repository": "kbrabrand/camelize-ts",
   "author": {
-		"name": "Kristoffer Brabrand",
-		"email": "kristoffer@brabrand.no",
-		"url": "https://github.com/kbrabrand"
-	},
+    "name": "Kristoffer Brabrand",
+    "email": "kristoffer@brabrand.no",
+    "url": "https://github.com/kbrabrand"
+  },
   "license": "MIT",
   "peerDependencies": {
     "typescript": "^4.1.3"
