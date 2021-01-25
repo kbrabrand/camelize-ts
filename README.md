@@ -11,7 +11,7 @@ As an example I've been using it to camelize PostgreSQL rows (returned with snak
 
 ## Example
 ```ts
-import camelize from 'camelize'
+import camelize from 'camelize-ts'
 
 // Expects camel case
 function nameIt({ 
