@@ -1,5 +1,6 @@
-import { types } from "util";
 import camelCase from "lodash.camelcase";
+import isDate from 'lodash.isdate'
+import isRegExp from 'lodash.isregexp'
 
 type CamelCase<S extends string> =
   S extends `${infer P1}_${infer P2}${infer P3}`
@@ -18,7 +19,7 @@ export type Camelize<T> = {
 
 function walk(obj): any {
   if (!obj || typeof obj !== "object") return obj;
-  if (types.isDate(obj) || types.isRegExp(obj)) return obj;
+  if (isDate(obj) || isRegExp(obj)) return obj;
   if (Array.isArray(obj)) return obj.map(walk);
 
   return Object.keys(obj).reduce((res, key) => {

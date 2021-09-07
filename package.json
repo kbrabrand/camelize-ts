@@ -1,6 +1,6 @@
 {
   "name": "camelize-ts",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Recursive camel casing of object property names with proper typing",
   "main": "dist/index.js",
   "scripts": {
@@ -50,6 +50,8 @@
     "clearMocks": true
   },
   "dependencies": {
-    "lodash.camelcase": "^4.3.0"
+    "lodash.camelcase": "^4.3.0",
+    "lodash.isdate": "^4.0.1",
+    "lodash.isregexp": "^4.0.1"
   }
 }

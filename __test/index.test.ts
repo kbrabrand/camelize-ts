@@ -11,6 +11,27 @@ describe('camelize', () => {
     expect(camelize(['dat_string', 'other_string'])).toEqual(['dat_string', 'other_string'])
   })
 
+  it('leaves dates and regexp', () => {
+    const regExp = new RegExp(/.*/)
+    const date = new Date(0)
+
+    expect(camelize({ 
+      a_key: 1, 
+      b: {
+        numb_erty: 123,
+        dat_erty: date,
+        regexp_erty: regExp
+      } 
+    })).toEqual({ 
+      aKey: 1, 
+      b: { 
+        numbErty: 123, 
+        datErty: date,
+        regexpErty: regExp 
+      } 
+    })
+  })
+
   it('object', () => {
     expect(camelize({ a_key: 1, b_key: 2 })).toEqual({ aKey: 1, bKey: 2 })
   })
