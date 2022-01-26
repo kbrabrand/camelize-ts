@@ -1,6 +1,6 @@
 camelize-ts
 ===
-[![Build Status](https://travis-ci.com/kbrabrand/camelize-ts.svg?branch=master)](https://travis-ci.com/kbrabrand/camelize-ts)
+[![CI](https://github.com/kbrabrand/camelize-ts/actions/workflows/main.yml/badge.svg)](https://github.com/kbrabrand/camelize-ts/actions/workflows/main.yml)
 
 A typescript typed camelCase function that recursively camel cases a snake cased object structure. It camel cases a simple string too, if you need that.
 
