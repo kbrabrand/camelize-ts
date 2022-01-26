@@ -1,7 +1,3 @@
-import camelCase from "lodash.camelcase";
-import isDate from 'lodash.isdate'
-import isRegExp from 'lodash.isregexp'
-
 type CamelCase<S extends string> =
   S extends `${infer P1}_${infer P2}${infer P3}`
     ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
@@ -17,9 +13,15 @@ export type Camelize<T> = {
     : T[K];
 };
 
+function camelCase(str: string) {
+  return str.replace(/[_.-](\w|$)/g, function (_, x) {
+      return x.toUpperCase();
+  });
+}
+
 function walk(obj): any {
   if (!obj || typeof obj !== "object") return obj;
-  if (isDate(obj) || isRegExp(obj)) return obj;
+  if (obj instanceof Date || obj instanceof RegExp) return obj;
   if (Array.isArray(obj)) return obj.map(walk);
 
   return Object.keys(obj).reduce((res, key) => {
