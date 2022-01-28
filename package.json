@@ -3,6 +3,7 @@
   "version": "2.0.3",
   "description": "Recursive camel casing of object property names with proper typing",
   "type": "module",
+  "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "engines": {
