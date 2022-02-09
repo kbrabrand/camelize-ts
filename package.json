@@ -1,6 +1,6 @@
 {
   "name": "camelize-ts",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Recursive camel casing of object property names with proper typing",
   "type": "module",
   "main": "./dist/index.js",
