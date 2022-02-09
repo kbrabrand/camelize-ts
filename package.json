@@ -6,6 +6,7 @@
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "sideEffects": false,
   "files": ["dist"],
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
