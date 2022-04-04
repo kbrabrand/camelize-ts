@@ -74,4 +74,31 @@ describe('camelize', () => {
 
     expect(camelized.aKey.aList[0].aDeeplyNestedObject.aDeeplyNestedObject.aDeeeeeplyNestedValue).toEqual('foo')
   })
+
+  it('leaves cased letters in place', () => {
+    type Snake = {
+      foo_bar_nested: {
+        Uppercased: {
+          foo_CAPS_foo: true
+        }
+      }
+      fooBar_bar: {
+        camelCased_foo_foo: 123
+      }
+    }
+
+    const a = camelize<Snake>({
+      foo_bar_nested: {
+        Uppercased: {
+          foo_CAPS_foo: true
+        }
+      },
+      fooBar_bar: {
+        camelCased_foo_foo: 123
+      }
+    })
+
+    expect(a.fooBarNested.Uppercased.fooCAPSFoo).toBe(true)
+    expect(a.fooBarBar.camelCasedFooFoo).toBe(123)
+  })
 })
