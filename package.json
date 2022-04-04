@@ -1,13 +1,15 @@
 {
   "name": "camelize-ts",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Recursive camel casing of object property names with proper typing",
   "type": "module",
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
