@@ -5,7 +5,7 @@ type CamelCase<S extends string> =
 
 
 
-export type Camelize<T> = {
+export type Camelize<T> = {} & {
   [K in keyof T as CamelCase<string & K>]: T[K] extends Array<infer U>
     ? U extends {}
       ? Array<Camelize<U>>
