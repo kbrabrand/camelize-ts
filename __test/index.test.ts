@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import camelize from '../src'
+import camelize, { type Camelize } from '../src'
 
 describe('camelize', () => {
   it('strings', () => {
@@ -100,5 +100,29 @@ describe('camelize', () => {
 
     expect(a.fooBarNested.Uppercased.fooCAPSFoo).toBe(true)
     expect(a.fooBarBar.camelCasedFooFoo).toBe(123)
+  })
+
+  it('nested optional properties', () => {
+    type T = {
+      one_a?: string;
+      one_b?: {
+        two_a?: string;
+        two_b?: {
+          three_a?: string;
+        };
+      };
+    }
+
+    const t: Camelize<T> = {
+      oneA: "string",
+      oneB: {
+        twoA: "string",
+        twoB: {
+          threeA: "c",
+        },
+      },
+    };
+
+    expect(t.oneB?.twoB?.threeA).toBe("c")
   })
 })
