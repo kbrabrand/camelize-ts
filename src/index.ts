@@ -7,10 +7,10 @@ type CamelCase<S extends string> =
 
 export type Camelize<T> = {
   [K in keyof T as CamelCase<string & K>]: T[K] extends Array<infer U>
-    ? U extends {}
+    ? U extends ({} | undefined)
       ? Array<Camelize<U>>
       : T[K]
-    : T[K] extends {}
+    : T[K] extends ({} | undefined)
     ? Camelize<T[K]>
     : T[K];
 };
