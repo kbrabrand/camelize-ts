@@ -26,7 +26,7 @@ function camelCase(str: string) {
 function walk(obj, shallow = false): any {
   if (!obj || typeof obj !== "object") return obj;
   if (obj instanceof Date || obj instanceof RegExp) return obj;
-  if (Array.isArray(obj)) return obj.map(v => shallow ? v : walk(v, shallow));
+  if (Array.isArray(obj)) return obj.map(v => shallow ? v : walk(v));
 
   return Object.keys(obj).reduce((res, key) => {
     const camel = camelCase(key);
