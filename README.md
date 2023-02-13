@@ -4,6 +4,8 @@ camelize-ts
 
 A typescript typed camelCase function that recursively camel cases a snake cased object structure. It camel cases a simple string too, if you need that.
 
+`camelize-ts` is [`snakify-ts`](https://www.npmjs.com/package/snakify-ts)’ twin 👯.
+
 ## Why do this again?
 This has obviously been done before, and the "new" thing with this pacakge is not camel casing itself but the fact that it is a generic that, given the form of the input data structure, will provide you with typing for the returned object structure so that it fits with other types.
 
@@ -25,12 +27,7 @@ function nameIt({
 }) { return `${firstName} ${lastName}` }
 
 // camel case snake_cased stuff from postgres
-const camelizedUser = camelize<{
-  id: number;
-  first_name: string;
-  last_name: string;
-  roles: string[];
-}>({
+const camelizedUser = camelize({
   id: 1,
   first_name: 'Grim',
   last_name: 'Reaper',
@@ -55,6 +52,38 @@ output:
 }
 
 Grim Reaper
+```
+
+### Shallow option
+By default camelize will traverse to the bottom of the object/array structure you pass. If you want to perform a shallow camelize, touching only the top level of the value you can pass true for the `shallow` option (second argument).
+
+### Type inference
+You don't need to pass a type to `camelize` since it uses argument inference to find the type to convert. But if you need to, you can pass a type like this:
+
+```ts
+camelize<
+  // type of value to camelize
+  { first_name: string },
+
+  // whether or not to perform shallow camelization
+  true
+>(
+  // value to camelize, type must match the specified type
+  value,
+
+  // shallow, must match what's set as the second type argument above (after the type)
+  true
+)
+```
+
+#### Type conversion
+If you need to convert just a type, you can use the `Camelize` generic type to do this:
+
+```ts
+import { Camelize } from 'camelize-ts'
+
+type MySnakePerson = { first_name: string }
+type MyCamelPerson = Camelize<MySnakePerson>
 ```
 
 ## Running tests
