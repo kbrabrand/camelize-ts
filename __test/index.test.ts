@@ -251,5 +251,19 @@ describe('camelize', () => {
 
       expect(t.oneB?.twoB?.threeA).toBe("c")
     })
+
+    it('does not convert a date', () => {
+      const date = new Date()
+      type T = {
+        one_a?: Date
+      }
+
+      const t: Camelize<T> = {
+        oneA: date
+      };
+
+      expect(t.oneA.toUTCString()).toBe(t.oneA.toUTCString())
+    })
+
   })
 })

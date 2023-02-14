@@ -3,18 +3,18 @@ type CamelCase<S extends string> =
     ? `${P1}${Uppercase<P2>}${CamelCase<P3>}`
     : S;
 
-
-
 export type Camelize<T, S = false> = {
-  [K in keyof T as CamelCase<string & K>]: T[K] extends Array<infer U>
-    ? U extends ({} | undefined)
-      ? Array<Camelize<U>>
-      : T[K]
-    : T[K] extends ({} | undefined)
-    ? S extends true
-      ? T[K]
-      : Camelize<T[K]>
-    : T[K];
+  [K in keyof T as CamelCase<string & K>]:
+  T[K] extends Date ? T[K] :
+    T[K] extends Array<infer U>
+      ? U extends ({} | undefined)
+        ? Array<Camelize<U>>
+        : T[K]
+      : T[K] extends ({} | undefined)
+        ? S extends true
+          ? T[K]
+          : Camelize<T[K]>
+        : T[K];
 };
 
 function camelCase(str: string) {
