@@ -3,19 +3,22 @@ type CamelCase<S extends string> =
     ? `${P1}${Uppercase<P2>}${CamelCase<P3>}`
     : S;
 
-
-
-export type Camelize<T, S = false> = {
+type CamelizeObject<T, S = false> = {
   [K in keyof T as CamelCase<string & K>]: T[K] extends Array<infer U>
     ? U extends ({} | undefined)
-      ? Array<Camelize<U>>
+      ? Array<CamelizeObject<U>>
       : T[K]
     : T[K] extends ({} | undefined)
     ? S extends true
       ? T[K]
-      : Camelize<T[K]>
+      : CamelizeObject<T[K]>
     : T[K];
 };
+
+export type Camelize<T, S = false> =
+  T extends Array<(infer U)>
+    ? Array<CamelizeObject<U, S>>
+    : CamelizeObject<T, S>;
 
 function camelCase(str: string) {
   return str.replace(/[_.-](\w|$)/g, function (_, x) {
@@ -26,7 +29,11 @@ function camelCase(str: string) {
 function walk(obj, shallow = false): any {
   if (!obj || typeof obj !== "object") return obj;
   if (obj instanceof Date || obj instanceof RegExp) return obj;
-  if (Array.isArray(obj)) return obj.map(v => shallow ? v : walk(v));
+  if (Array.isArray(obj)) return obj.map(v => {
+    if (!shallow) { return walk(v) }
+    if (typeof v === 'object') return walk(v, shallow)
+    return v
+  })
 
   return Object.keys(obj).reduce((res, key) => {
     const camel = camelCase(key);
