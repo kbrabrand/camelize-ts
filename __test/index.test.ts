@@ -126,6 +126,10 @@ describe('camelize', () => {
 
       expect(t.oneB?.two_b?.three_a).toBe("c")
     })
+
+    it('camelizes arrays', () => {
+      expect(camelize([{foo_bar:{bar_foo:123}}], true)[0].fooBar.bar_foo).toBe(123)
+    })
   })
 
   describe('deep', () => {
@@ -250,6 +254,10 @@ describe('camelize', () => {
       };
 
       expect(t.oneB?.twoB?.threeA).toBe("c")
+    })
+
+    it('camelizes arrays', () => {
+      expect(camelize([{foo_bar:{bar_foo:123}}])[0].fooBar.barFoo).toBe(123)
     })
   })
 })
