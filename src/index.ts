@@ -4,15 +4,18 @@ type CamelCase<S extends string> =
     : S;
 
 type CamelizeObject<T, S = false> = {
-  [K in keyof T as CamelCase<string & K>]: T[K] extends Array<infer U>
-    ? U extends ({} | undefined)
-      ? Array<CamelizeObject<U>>
-      : T[K]
-    : T[K] extends ({} | undefined)
-    ? S extends true
-      ? T[K]
-      : CamelizeObject<T[K]>
-    : T[K];
+  [K in keyof T as CamelCase<string & K>]:
+    T[K] extends Date ? T[K] :
+      T[K] extends RegExp ? T[K] :
+        T[K] extends Array<infer U>
+          ? U extends ({} | undefined)
+            ? Array<CamelizeObject<U>>
+            : T[K]
+          : T[K] extends ({} | undefined)
+          ? S extends true
+            ? T[K]
+            : CamelizeObject<T[K]>
+          : T[K]
 };
 
 export type Camelize<T, S = false> =

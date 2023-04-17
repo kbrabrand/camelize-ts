@@ -81,6 +81,7 @@ describe('camelize', () => {
         foo_bar_nested: {
           Uppercased: {
             foo_CAPS_foo: true
+            da_DATE_date: Date
           }
         }
         fooBar_bar: {
@@ -88,10 +89,12 @@ describe('camelize', () => {
         }
       }
 
+      const aDate = new Date()
       const a = camelize<Snake, true>({
         foo_bar_nested: {
           Uppercased: {
-            foo_CAPS_foo: true
+            foo_CAPS_foo: true,
+            da_DATE_date: aDate
           }
         },
         fooBar_bar: {
@@ -101,6 +104,7 @@ describe('camelize', () => {
 
       expect(a.fooBarNested.Uppercased.foo_CAPS_foo).toBe(true)
       expect(a.fooBarBar.camelCased_foo_foo).toBe(123)
+      expect(a.fooBarNested.Uppercased.da_DATE_date).toBe(aDate)
     })
 
     it('nested optional properties', () => {
@@ -210,6 +214,7 @@ describe('camelize', () => {
         foo_bar_nested: {
           Uppercased: {
             foo_CAPS_foo: true
+            da_DATE_date: Date
           }
         }
         fooBar_bar: {
@@ -217,10 +222,12 @@ describe('camelize', () => {
         }
       }
 
+      const aDate = new Date()
       const a = camelize<Snake>({
         foo_bar_nested: {
           Uppercased: {
-            foo_CAPS_foo: true
+            foo_CAPS_foo: true,
+            da_DATE_date: aDate
           }
         },
         fooBar_bar: {
@@ -230,6 +237,7 @@ describe('camelize', () => {
 
       expect(a.fooBarNested.Uppercased.fooCAPSFoo).toBe(true)
       expect(a.fooBarBar.camelCasedFooFoo).toBe(123)
+      expect(a.fooBarNested.Uppercased.daDATEDate).toBe(aDate)
     })
 
     it('nested optional properties', () => {
