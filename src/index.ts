@@ -4,7 +4,7 @@ type CamelCase<S extends string> =
     : S;
 
 type CamelizeObject<T, S = false> = {
-  [K in keyof T as CamelCase<string & K>]:
+  [K in keyof T as Uncapitalize<CamelCase<string & K>>]:
     T[K] extends Date ? T[K] :
       T[K] extends RegExp ? T[K] :
         T[K] extends Array<infer U>
