@@ -235,9 +235,9 @@ describe('camelize', () => {
         }
       })
 
-      expect(a.fooBarNested.Uppercased.fooCAPSFoo).toBe(true)
+      expect(a.fooBarNested.uppercased.fooCAPSFoo).toBe(true)
       expect(a.fooBarBar.camelCasedFooFoo).toBe(123)
-      expect(a.fooBarNested.Uppercased.daDATEDate).toBe(aDate)
+      expect(a.fooBarNested.uppercased.daDATEDate).toBe(aDate)
     })
 
     it('nested optional properties', () => {
@@ -266,6 +266,33 @@ describe('camelize', () => {
 
     it('camelizes arrays', () => {
       expect(camelize([{foo_bar:{bar_foo:123}}])[0].fooBar.barFoo).toBe(123)
+    })
+
+    it('uncapitalize object keys', () => {
+      type T = {
+        UpperCaseKey: string;
+        lowerCaseKey: {
+          NestedKey: string;
+          optionalKey?: string;
+        },
+        Snake_Key: {
+          NestedKey: string;
+        }
+      }
+
+      const t = camelize<T>({
+        UpperCaseKey: "string",
+        lowerCaseKey: {
+          NestedKey: "value1",
+          optionalKey: "string"
+        },
+        Snake_Key: {
+          NestedKey: "value2"
+        }
+      });
+
+      expect(t.lowerCaseKey.nestedKey).toBe("value1")
+      expect(t.snakeKey.nestedKey).toBe("value2")
     })
   })
 })

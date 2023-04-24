@@ -40,7 +40,8 @@ function walk(obj, shallow = false): any {
 
   return Object.keys(obj).reduce((res, key) => {
     const camel = camelCase(key);
-    res[camel] = shallow ? obj[key] : walk(obj[key]);
+    const uncapitalized = camel.charAt(0).toLowerCase() + camel.slice(1);
+    res[uncapitalized] = shallow ? obj[key] : walk(obj[key]);
     return res;
   }, {});
 }
