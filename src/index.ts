@@ -4,7 +4,7 @@ type CamelCase<S extends string> =
     : S;
 
 type CamelizeObject<T, S = false> = {
-  [K in keyof T as CamelCase<string & K>]:
+  [K in keyof T as Uncapitalize<CamelCase<string & K>>]:
     T[K] extends Date ? T[K] :
       T[K] extends RegExp ? T[K] :
         T[K] extends Array<infer U>
@@ -40,7 +40,8 @@ function walk(obj, shallow = false): any {
 
   return Object.keys(obj).reduce((res, key) => {
     const camel = camelCase(key);
-    res[camel] = shallow ? obj[key] : walk(obj[key]);
+    const uncapitalized = camel.charAt(0).toLowerCase() + camel.slice(1);
+    res[uncapitalized] = shallow ? obj[key] : walk(obj[key]);
     return res;
   }, {});
 }

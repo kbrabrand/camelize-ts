@@ -2,7 +2,7 @@ camelize-ts
 ===
 [![CI](https://github.com/kbrabrand/camelize-ts/actions/workflows/main.yml/badge.svg)](https://github.com/kbrabrand/camelize-ts/actions/workflows/main.yml)
 
-A typescript typed camelCase function that recursively camel cases a snake cased object structure. It camel cases a simple string too, if you need that.
+A typescript typed camelCase function that recursively camel cases a snake cased or pascal cased object structure. It camel cases a simple string too, if you need that.
 
 `camelize-ts` is [`snakify-ts`](https://www.npmjs.com/package/snakify-ts)’ twin 👯.
 
@@ -53,6 +53,46 @@ output:
 
 Grim Reaper
 ```
+
+It also converts pascal cased object fields to camel case.
+
+```ts
+import camelize from 'camelize-ts'
+
+const camelizedUser = camelize({
+  Id: 1,
+  first_name: 'Grim',
+  last_name: 'Reaper',
+  greetings: {
+    Morning: 'Good morning!',
+    Night: 'Good night!'
+  },
+  roles: ['user', 'admin'],
+  UpdatedAt: '2000-01-01T00:00:00.000Z'
+})
+
+console.log(JSON.stringify(camelizedUser, null, 2))
+```
+
+output:
+
+```sh
+{
+  "id": 1,
+  "firstName": "Grim",
+  "lastName": "Reaper",
+  "greetings": {
+    "morning": "Good morning!",
+    "night": "Good night!"
+  },
+  "roles": [
+    "user",
+    "admin"
+  ],
+  "updatedAt": "2000-01-01T00:00:00.000Z"
+}
+```
+
 
 ### Shallow option
 By default camelize will traverse to the bottom of the object/array structure you pass. If you want to perform a shallow camelize, touching only the top level of the value you can pass true for the `shallow` option (second argument).
