@@ -56,6 +56,6 @@ export default function camelize<T, S extends boolean = false>(
    * If true, only the top level keys of the obj will be camel cased
    */
   shallow?: S
-): T extends String ? CamelCase<T> : Camelize<T, S> {
+): T extends string ? CamelCase<T> : Camelize<T, S> {
   return typeof obj === "string" ? camelCase(obj) : walk(obj, shallow);
 }
