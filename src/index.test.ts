@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import camelize, { type Camelize } from '../src'
+import camelize, { type Camelize } from './index.js'
 
 describe('camelize', () => {
   describe('shallow', () => {
@@ -73,7 +73,7 @@ describe('camelize', () => {
         }
       }, true)
 
-      expect(camelized.aKey.a_list[0].a_deeply_nested_object.a_deeply_nested_object.a_deeeeeply_nested_value).toEqual('bar')
+      expect(camelized.aKey.a_list[0]!.a_deeply_nested_object.a_deeply_nested_object.a_deeeeeply_nested_value).toEqual('bar')
     })
 
     it('leaves cased letters in place', () => {
@@ -132,7 +132,7 @@ describe('camelize', () => {
     })
 
     it('camelizes arrays', () => {
-      expect(camelize([{foo_bar:{bar_foo:123}}], true)[0].fooBar.bar_foo).toBe(123)
+      expect(camelize([{foo_bar:{bar_foo:123}}], true)[0]!.fooBar.bar_foo).toBe(123)
     })
   })
 
@@ -206,7 +206,7 @@ describe('camelize', () => {
         }
       })
 
-      expect(camelized.aKey.aList[0].aDeeplyNestedObject.aDeeplyNestedObject.aDeeeeeplyNestedValue).toEqual('foo')
+      expect(camelized.aKey.aList[0]!.aDeeplyNestedObject.aDeeplyNestedObject.aDeeeeeplyNestedValue).toEqual('foo')
     })
 
     it('leaves cased letters in place', () => {
@@ -265,7 +265,7 @@ describe('camelize', () => {
     })
 
     it('camelizes arrays', () => {
-      expect(camelize([{foo_bar:{bar_foo:123}}])[0].fooBar.barFoo).toBe(123)
+      expect(camelize([{foo_bar:{bar_foo:123}}])[0]!.fooBar.barFoo).toBe(123)
     })
 
     it('uncapitalize object keys', () => {

@@ -29,7 +29,7 @@ function camelCase(str: string) {
   });
 }
 
-function walk(obj, shallow = false): any {
+function walk(obj: any, shallow = false): any {
   if (!obj || typeof obj !== "object") return obj;
   if (obj instanceof Date || obj instanceof RegExp) return obj;
   if (Array.isArray(obj)) return obj.map(v => {
@@ -38,7 +38,7 @@ function walk(obj, shallow = false): any {
     return v
   })
 
-  return Object.keys(obj).reduce((res, key) => {
+  return Object.keys(obj).reduce<Record<string, any>>((res, key) => {
     const camel = camelCase(key);
     const uncapitalized = camel.charAt(0).toLowerCase() + camel.slice(1);
     res[uncapitalized] = shallow ? obj[key] : walk(obj[key]);

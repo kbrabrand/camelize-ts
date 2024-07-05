@@ -1,30 +1,8 @@
 {
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "exclude": ["dist"],
   "compilerOptions": {
-    "declaration": true,
-    "experimentalDecorators": true,
-    "module": "ES2020",
-    "target": "ES2020",
-    "noImplicitAny": false,
-    "suppressImplicitAnyIndexErrors": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
-    "sourceMap": true,
-    "inlineSources": true,
-    "sourceRoot": "/",
-    "outDir": "dist",
-    "rootDir": "./src",
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "node_modules/*",
-        "src/types/*"
-      ],
-    }
-  },
-  "include": ["src/**/*", "__mocks__/**/*", "__test/index.test.ts"],
-  "files": ["src/index.ts"],
-  "exclude": ["node_modules", "__test"]
+    "module": "NodeNext",
+    "target": "ESNext"
+  }
 }
-  
